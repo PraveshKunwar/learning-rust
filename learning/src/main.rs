@@ -36,8 +36,31 @@ fn main() {
         }
     };
     println!("The result is {}", result);
+
+    let mut num = 3;
+    while num != 0 {
+        println!("{}!", num);
+        num -= 1;
+    }
+    let condition = true;
+
+   // let number = if condition { 5 } else { "six" };
+
+    //println!("The value of number is: {}", number);
+    let arr: [i32; 5] = [10, 20, 30, 40, 50];
+    for element in arr.iter() {
+        println!("The value is {}", element);
+    }
+   println!("The value of converting 32 degrees far to cel is {}", far_to_cel(32.0));
+
+
+   //learn ownership
 }
 
 fn subtract(x: i32, y: i32) -> i32 {
    return x + y;
+}
+
+fn far_to_cel(f: f64) -> f64 {
+    return (f - 32.0) * 0.5556;
 }
