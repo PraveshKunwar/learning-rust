@@ -57,7 +57,7 @@ fn main() {
    //learn ownership
    /*Each value in Rust has a variable that’s called its owner.
     There can only be one owner at a time.
-    When the owner goes out of scope, the value will be dropped.*/
+    When the owner goes out of scope, the value will be dropped.
   
   
         {                      // s is not valid here, it’s not yet declared
@@ -72,12 +72,29 @@ fn main() {
     str.push_str(", my name is PraveshK!");
     println!("{}", str);
 
-    let s1 = String::from("Hello test");
-    let len = calc_length(&s1);
-    println!("The length of '{}' is {}.", s1, len);
+    let mut s1 = String::from("Hello test");
+    let len = calc_length(&mut s1);
+    println!("The length of '{}' is {}.", s1, len);*/
+    let mut s = String::from("Hello world");
+    let hello = &s[0..5];
+    let world = &s[6..11];
+    println!("{} {}", hello, world);
 }
 
-fn calc_length(s: &String) -> usize { //&String means its reffering to a string value
+fn first_word(s: &String) -> usize {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return i;
+        }
+    }
+
+    s.len()
+}
+
+
+fn calc_length(s: &mut String) -> usize { //&String means its reffering to a string value
     return s.len();
 }
 
