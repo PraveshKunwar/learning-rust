@@ -1,4 +1,5 @@
 #![allow(dead_code, unused_variables)]
+
 fn main() {
 /*
     let mut x  = 5;
@@ -74,23 +75,77 @@ fn main() {
 
     let mut s1 = String::from("Hello test");
     let len = calc_length(&mut s1);
-    println!("The length of '{}' is {}.", s1, len);*/
-    let mut s = String::from("Hello world");
-    let hello = &s[0..5];
-    let world = &s[6..11];
-    println!("{} {}", hello, world);
+    println!("The length of '{}' is {}.", s1, len);
+
+    
+    let int_arr: [i32; 6] = [1, 2, 3, 4, 5, 6];
+    let slice = &int_arr[3..];
+    println!("{:?}", slice); */
+
+    let person = User {
+        name: String::from("Pravesh Kunwar"),
+        email: String::from("testtest1234@gmail.com"),
+        dob: String::from("01/01/04"),
+        age: 17
+    };
+
+   
+
+    println!("Hello {}!", person.name);
+
+    let rect1  = Rectangle {
+        width: 30,
+        height: 30
+    };
+
+    let rect2 = Rectangle {
+        width: 45,
+        height: 45
+    };
+
+    let thing = Rectangle::square(5);
+
+    println!("Rect1 is {:?}", rect1);
+    println!("Squared is {:?}", thing);
+    println!("Can rect1 hold rect2? {}", rect1.can_hold(&rect2));
+}
+struct User {
+    name: String,
+    email: String,
+    dob: String,
+    age: i32
 }
 
-fn first_word(s: &String) -> usize {
-    let bytes = s.as_bytes();
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
 
-    for (i, &item) in bytes.iter().enumerate() {
-        if item == b' ' {
-            return i;
-        }
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+    fn can_hold(&self, other: &Rectangle) -> bool {
+        self.width > other.width && self.height > other.height
     }
 
-    s.len()
+    fn square(size: u32) -> Rectangle {
+        Rectangle { 
+            width: size,
+            height: size
+        }
+    }
+}
+
+fn first_word(s: &str) -> &str {
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' '{
+            return &s[0..i];
+        }
+    }
+    &s[..]
 }
 
 
@@ -109,3 +164,4 @@ fn subtract(x: i32, y: i32) -> i32 {
 fn far_to_cel(f: f64) -> f64 {
     return (f - 32.0) * 0.5556;
 }
+
