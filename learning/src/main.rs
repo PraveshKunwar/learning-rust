@@ -101,12 +101,6 @@ fn main() {
     let home = IpAddr::V4(127, 0, 0, 1);
     let six = add_one(Some(5));
     let none = add_one(None);
-    let test = 5;
-    if let 3 = test {
-        println!("equal")
-    } else {
-        println!("not equal")
-    }
 }
 #[derive(Debug)]
 enum UsState {
