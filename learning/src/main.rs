@@ -97,6 +97,27 @@ fn main() {
     println!("Rect1 is {:?}", rect1);
     println!("Squared is {:?}", thing);
     println!("Can rect1 hold rect2? {}", rect1.can_hold(&rect2));
+
+    let home = IpAddr::V4(127, 0, 0, 1);
+    let six = add_one(Some(5));
+    let none = add_one(None);
+}
+#[derive(Debug)]
+enum UsState {
+    Alabama,
+    Alaska,
+}
+
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter(UsState),
+}
+
+enum IpAddr {
+    V4(u8, u8, u8, u8),
+    V6(String),
 }
 
 #[derive(Debug)]
@@ -123,6 +144,28 @@ impl Rectangle {
         Rectangle {
             width: size,
             height: size,
+        }
+    }
+}
+
+fn add_one(x: Option<i32>) -> Option<i32> {
+    match x {
+        None => None,
+        Some(i) => Some(i + 1),
+    }
+}
+
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => {
+            println!("Lucky penny");
+            1
+        }
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter(state) => {
+            println!("State quarter from {:?}!", state);
+            25
         }
     }
 }
