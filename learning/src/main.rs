@@ -102,7 +102,30 @@ fn main() {
     let six = add_one(Some(5));
     let none = add_one(None);
 
-    
+    {
+        let v: Vec<i32> = Vec::new();
+    } // v goes out of scope here
+    let mut t = vec![1, 2, 3];
+    let first_element = &t[0];
+    /*match t.get(1) {
+        Some(second) => println!("The second element of the vector is {:?}", second),
+        None => println!("No element at the position exists."),
+    }*/
+    for i in &mut t {
+       *i += 50;
+       println!("{}", i);
+    }
+    enum SpreadsheetCell {
+        Int(i32),
+        Float(f64),
+        Text(String),
+    }
+
+    let row = vec![
+        SpreadsheetCell::Int(3),
+        SpreadsheetCell::Text(String::from("blue")),
+        SpreadsheetCell::Float(10.12),
+    ];
 }
 #[derive(Debug)]
 enum UsState {
@@ -153,7 +176,7 @@ impl Rectangle {
 fn add_one(x: Option<i32>) -> Option<i32> {
     match x {
         None => None,
-        Some(i) => Some(i + 1),  
+        Some(i) => Some(i + 1),
     }
 }
 
