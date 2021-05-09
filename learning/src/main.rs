@@ -1,5 +1,5 @@
 #![allow(dead_code, unused_variables)]
-
+use std::collections::HashMap;
 fn main() {
     /*
         let mut x  = 5;
@@ -112,8 +112,8 @@ fn main() {
         None => println!("No element at the position exists."),
     }*/
     for i in &mut t {
-       *i += 50;
-       println!("{}", i);
+        *i += 50;
+        println!("{}", i);
     }
     enum SpreadsheetCell {
         Int(i32),
@@ -126,6 +126,34 @@ fn main() {
         SpreadsheetCell::Text(String::from("blue")),
         SpreadsheetCell::Float(10.12),
     ];
+
+    let data = "something";
+    let s = data.to_string(); //this and String::from() are equal.
+    let mut new_string = String::from("Hello");
+    new_string.push_str(", world!");
+    println!("{}", new_string);
+    let s1 = String::from("tic");
+    let s2 = String::from("tac");
+    let s3 = String::from("toe");
+    let ss = format!("{}-{}-{}", s1, s2, s3);
+    let hello = "Здравствуйте";
+    /*for c in hello.chars() {
+        println!("{}", c);
+    }*/
+    let mut scores: HashMap<String, i32> = HashMap::new();
+    scores.insert(String::from("Hello World"), 2);
+    let teams = vec![String::from("Blue"), String::from("Yellow")];
+    let init_scores = vec![10, 50];
+    let etc_scores: HashMap<_, _> = teams.into_iter().zip(init_scores.into_iter()).collect();
+    let test_score = scores.get(&String::from("Hello World"));
+    match test_score {
+        Some(key) => println!("{}", key),
+        None => println!("Nothing found"),
+    }
+    /*for (K, V) in &etc_scores {
+        println!("{}: {}", K, V);
+    }*/
+    scores.entry(String::from("Red")).or_insert(50);
 }
 #[derive(Debug)]
 enum UsState {
