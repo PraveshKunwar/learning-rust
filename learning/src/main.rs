@@ -1,5 +1,8 @@
 #![allow(dead_code, unused_variables)]
 use std::collections::HashMap;
+use std::fs::File;
+use std::fs::write;
+use std::io::ErrorKind;
 fn main() {
     /*
         let mut x  = 5;
@@ -154,6 +157,21 @@ fn main() {
         println!("{}: {}", K, V);
     }*/
     scores.entry(String::from("Red")).or_insert(50);
+    let f = File::open("hello.txt");
+
+    let f = match f {
+        Ok(file) => file,
+        Err(error) => match error.kind() {
+            ErrorKind::NotFound => match File::create("hello.txt") {
+                Ok(fc) => fc,
+                Err(e) => panic!("Problem creating the file: {:?}", e),
+            },
+            other_error => {
+                panic!("Problem opening the file: {:?}", other_error)
+            }
+        },
+    };
+   
 }
 #[derive(Debug)]
 enum UsState {
@@ -259,3 +277,4 @@ fn subtract(x: i32, y: i32) -> i32 {
 fn far_to_cel(f: f64) -> f64 {
     return (f - 32.0) * 0.5556;
 }
+
