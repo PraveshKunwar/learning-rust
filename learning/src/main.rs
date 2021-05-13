@@ -4,6 +4,8 @@ use std::fs::File;
 use std::io;
 use std::io::Read;
 
+pub mod calculator;
+
 fn main() {
     /*
         let mut x  = 5;
@@ -150,6 +152,8 @@ fn main() {
     let init_scores = vec![10, 50];
     let etc_scores: HashMap<_, _> = teams.into_iter().zip(init_scores.into_iter()).collect();
     let test_score = scores.get(&String::from("Hello World"));
+    let test = calculator::calculator::add_or_sub::add(5, 6);
+    println!("{}", test);
     match test_score {
         Some(key) => println!("{}", key),
         None => println!("Nothing found"),
@@ -177,6 +181,49 @@ fn main() {
         Err(e) => panic!("{}", e),
     }
 }
+
+fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
+    let mut largest = list[0];
+
+    for &item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+pub trait Summary {
+    fn summarize(&self) -> String;
+}
+
+pub struct NewsArticle {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&self) -> String {
+        format!("{}, by {} ({})", self.headline, self.author, self.location)
+    }
+}
+
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+impl Summary for Tweet {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
+    }
+}
+
 
 fn read_username() -> Result<String, io::Error> {
     let mut s = String::new();
